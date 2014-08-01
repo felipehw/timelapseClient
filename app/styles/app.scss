@@ -1,0 +1,34 @@
+// MAIN SCSS
+
+/* FONT AWESOME */
+$fa-font-path: "/assets/fonts" !default; // sobrescrevendo o dir onde estão as fontes
+//@import "vendor/font-awesome/scss/font-awesome.scss";
+@import '//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css';
+/* /FONT AWESOME */
+
+/* [Grid - A simple guid to responsive design](http://www.adamkaplan.me/grid/) */
+/* include borders and padding in the width of your content. */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* controls the page's maximum width. */
+.container {
+  margin: 0 auto;
+  max-width: 1280px; // adotei outro valor
+  width: 90%;
+}
+/* /[Grid - A simple guid to responsive design](http://www.adamkaplan.me/grid/) */
+
+/* CORES */
+
+$gray-dar  : #b3b3b3; // color loading
+$pink       : pink;    // important feedback background
+
+/* /CORES */
+
+html, body {
+  color: black;
+  margin: 20px;
+}
