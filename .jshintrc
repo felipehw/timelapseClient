@@ -2,7 +2,8 @@
   "predef": {
     "document": true,
     "window": true,
-    "TimelapseClientENV": true
+    "TimelapseClientENV": true,
+    "EmberSockets": true
   },
   "browser" : true,
   "boss" : true,

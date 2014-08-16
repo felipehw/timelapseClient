@@ -1,6 +1,8 @@
 <span>{{nPhotosLoaded}} de {{photos.length}}</span>
 
-<span>Número da foto atual: {{nPhotoActual}}</span>
+{{#if nPhotoActualFtd}}
+<span>Número da foto atual: {{nPhotoActualFtd}}</span>
+{{/if}}
 
 <div class="photo-container">
   <img alt="Loading">
