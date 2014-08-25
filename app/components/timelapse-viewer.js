@@ -1,13 +1,32 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNames: ['timelapse-viewer'],
   nPhotosLoaded: 0,
   nPhotoActual: null,
-  nPhotoActualFtd: function() {
-    var nPhotoActual = this.get('nPhotoActual');
+  nPhotoActualFtd: function(key, value) {
+    var that = this,
+        nPhotoActual;
+
+    // setter
+    if (arguments.length > 1) {
+      that.set('nPhotoActual', value - 1);
+    }
+    //getter
+    nPhotoActual = that.get('nPhotoActual');
     return nPhotoActual !== null ? nPhotoActual + 1 : null; //for template, not array's index
   }.property('nPhotoActual'),
-  photoChangerSpeed: 500,
+  photoActualData: function() {
+    return this.get('photos')[this.get('nPhotoActual')];
+  }.property('nPhotoActual'),
+  photoChangerSpeedInFps: 2,
+  photoChangerSpeedInFpsMax: 20,
+  photoChangerSpeedInFpsMin: 1,
+  photoChangerSpeedInMsFtd: function() {
+    var that = this,
+        photoChangerSpeedInFps = window.parseFloat( that.get('photoChangerSpeedInFps') );
+    return (1000/photoChangerSpeedInFps).toFixed(2);
+  }.property('photoChangerSpeedInFps'),
   imgsElements: [],
   imgElementActual: null,
   isDownloadingPhotos: true, // starts 'true' for don't trigger 'getNewPhotos' before initial download in 'didInserElement'
@@ -46,23 +65,46 @@ export default Ember.Component.extend({
     }
   }.observes('nPhotosLoaded', 'photos.length', 'isDownloadingPhotos'),
   isChangeImgElementActualActive: false,
+  changeImgElementActualLaterCall: null,
   changeImgElementActual: function() {
     var that = this;
     var imgElementChangerRecursive = function() {
       var imgsElements = that.get('imgsElements'),
-          imgElementActual = that.get('imgElementActual'),
-          imgElementNext;
+          imgElementActual = imgsElements[that.get('nPhotoActual')] ?
+                             imgsElements[that.get('nPhotoActual')] : imgsElements.get('firstObject'),
+          imgElementNext,
+          changeImgElementActualLaterCall;
       imgElementNext = imgsElements[imgsElements.indexOf(imgElementActual) + 1] !== undefined ?
                        imgsElements[imgsElements.indexOf(imgElementActual) + 1] : imgsElements.get('firstObject');
-      that.$('div.photo-container > img').replaceWith(imgElementNext);
+      that.$('.photo-container > img').replaceWith(imgElementNext);
       that.set('imgElementActual', imgElementNext );
       that.set('nPhotoActual', imgsElements.indexOf(imgElementNext) );
-      Ember.run.later( that, imgElementChangerRecursive, that.get('photoChangerSpeed') );
+      if (that.get('isChangeImgElementActualActive') ) {
+        changeImgElementActualLaterCall = Ember.run.later( that, imgElementChangerRecursive, that.get('photoChangerSpeedInMsFtd') );
+        that.set('changeImgElementActualLaterCall', changeImgElementActualLaterCall);
+      }
     };
+
     if (!that.get('isChangeImgElementActualActive') ) {
       that.set('isChangeImgElementActualActive', true);
       imgElementChangerRecursive();
     }
+  },
+  actions: {
+    playTimelapse: function() {
+      var that = this;
+      that.changeImgElementActual();
+    },
+    pauseTimelapse: function() {
+      var that = this;
+      Ember.run.cancel( that.get('changeImgElementActualLaterCall') );
+      that.set('isChangeImgElementActualActive', false);
+    },
+    stopTimelapse: function() {
+      var that = this;
+      that.set('nPhotoActual', 0);
+      that.send('pauseTimelapse');
+    },
   },
   didInsertElement: function() {
     var that = this;

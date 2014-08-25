@@ -23,12 +23,136 @@
 
 /* CORES */
 
+$black     : black;
 $gray-dar  : #b3b3b3; // color loading
 $pink       : pink;    // important feedback background
 
 /* /CORES */
 
 html, body {
-  color: black;
+  color: $black;
   margin: 20px;
+}
+
+.button {
+  cursor: pointer;
+}
+
+@mixin msg-over-content() {
+    background-color: rgba(0,0,0,0.6);
+    border: solid 1px rgba(0,0,0,0.0);
+    border-radius: 4px;
+    color: $gray-dar;
+}
+
+.timelapse-viewer {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  .photo-container {
+    border: 4px solid #FFF;
+    box-shadow: 1px 1px 4px #000;
+    text-align: center;
+    img {
+      width: 100%;
+    }
+  }
+  .download-status {
+    @include msg-over-content();
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0s linear 0s, opacity 0.1s;
+  }
+  .download-status.invisible {
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0s linear 4s, opacity 4s;
+  }
+  .photo-info {
+    @include msg-over-content();
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    position: absolute;
+    padding: 0.5rem;
+    left: 4px;
+    top: 4px;
+  }
+  .timelapse-controllers {
+    @include msg-over-content();
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 4px;
+    left: 5px;
+    width: calc(100% - 10px);
+    .navigator {
+      display: inline-block;
+      width: calc(100% - 23rem);
+      .navigator-buttons {
+        display: inline-block;
+        width: 4rem;
+      }
+      .navigator-slider {
+        display: inline-flex;
+        margin-left: -0.7rem;
+        width: calc(100% - 5rem);
+        input[type="range"] {
+          width: 80%;
+        }
+        span.photo-number {
+          min-width: 3rem;
+        }
+      }
+      .navigator-slider > * {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+    }
+    .timer {
+      display: inline-block;
+      width: 22rem;
+      .timer-controllers {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        input[type="range"] {
+          width: 90%;
+        }
+      }
+      .timer-controllers > * {
+        white-space: nowrap;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .timer-status {
+        font-size: 0.8rem;
+        text-align: right;
+      }
+    }
+    .button:hover {
+      color: #ededed;
+    }
+  }
+}
+.timelapse-viewer {
+  .timelapse-controllers {
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0s linear 1s, opacity 1s;
+  }
+}
+.timelapse-viewer:hover {
+  .timelapse-controllers {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
 }

@@ -1,11 +1,54 @@
-<span>{{nPhotosLoaded}} de {{photos.length}}</span>
 
-{{#if nPhotoActualFtd}}
-<span>Número da foto atual: {{nPhotoActualFtd}}</span>
-{{/if}}
+<span {{bind-attr class=":download-status isDownloadingPhotos:visible:invisible"}}>
+  <span class="glyphicon glyphicon-refresh"></span> Baixando {{nPhotosLoaded}} de {{photos.length}}
+</span>
 
-<div class="photo-container">
+<figure class="photo-container">
   <img alt="Loading">
-</div>
+  {{#if photoActualData.date}}
+    <figcaption class="photo-info">
+        <span class="photo-date"> {{photoActualData.date}} </span>
+    </figcaption>
+  {{/if}}
+</figure>
 
-{{input type="number" value=photoChangerSpeed}}
+<div class="timelapse-controllers">
+
+  <div class="navigator">
+    <span class="navigator-buttons">
+      {{#if isChangeImgElementActualActive}}
+        <span class="glyphicon glyphicon-pause button" {{action 'pauseTimelapse'}}></span>
+      {{else}}
+        <span class="glyphicon glyphicon-play button" {{action 'playTimelapse'}}></span>
+      {{/if}}
+      <span class="glyphicon glyphicon-stop button" {{action 'stopTimelapse'}}></span>
+    </span>
+    <span class="navigator-slider">
+      <span class="photoNumber">
+        {{#if nPhotoActualFtd}}
+          {{nPhotoActualFtd}}
+        {{/if}}
+      </span>
+      {{input type="range" value=nPhotoActualFtd min=1 max=nPhotosLoaded}}
+      <span class="photoNumber">
+        {{nPhotosLoaded}}
+      </span>
+    </span>
+
+  </div>
+
+  <div class="timer">
+    <div class="timer-controllers">
+      <span>
+        <span class="glyphicon glyphicon-time"></span>
+        {{photoChangerSpeedInFpsMin}}
+      </span>
+      {{input type="range" value=photoChangerSpeedInFps min=photoChangerSpeedInFpsMin max=photoChangerSpeedInFpsMax}}
+      <span>{{photoChangerSpeedInFpsMax}}</span>
+    </div>
+    <div class="timer-status">
+      Fps: {{photoChangerSpeedInFps}} (refresh a cada {{photoChangerSpeedInMsFtd}} ms)
+    </div>
+  </div>
+
+</div>
