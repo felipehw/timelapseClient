@@ -22,11 +22,20 @@ var app = new EmberApp();
 app.import('vendor/socket.io-client/socket.io.js');
 app.import('vendor/ember-sockets/dist/ember-sockets.js');
 
+app.import('vendor/bootstrap/dist/css/bootstrap.css');
+var fontTree = pickFiles('vendor/bootstrap/dist/fonts', {
+  srcDir: '/',
+  files: ['*'],
+  destDir: '/fonts'
+});
+
+/*
 var fontTree = pickFiles('vendor/font-awesome/fonts', {
   srcDir: '/',
   files: ['*'],
   destDir: '/assets/fonts'
 });
+*/
 
 //module.exports = app.toTree();
 module.exports = mergeTrees([app.toTree(), fontTree]);
