@@ -33,15 +33,14 @@
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
 
-    <script>
-      window.TimelapseClientENV = {{ENV}};
-      window.EmberENV = window.TimelapseClientENV.EmberENV;
-    </script>
-    <script src="assets/test-support.js"></script>
     <script src="assets/vendor.js"></script>
+    <script src="assets/test-support.js"></script>
     <script src="assets/timelapse-client.js"></script>
     <script src="testem.js"></script>
     <script>
+      window.TimelapseClientENV = require('timelapse-client/config/environment')['default'];
+      window.EmberENV = window.TimelapseClientENV.EmberENV;
+
       require('timelapse-client/tests/test-helper');
     </script>
     <script src="assets/test-loader.js"></script>

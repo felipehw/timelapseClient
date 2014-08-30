@@ -13,13 +13,11 @@
     <link rel="stylesheet" href="assets/timelapse-client.css">
   </head>
   <body>
-    <script>
-      window.TimelapseClientENV = {{ENV}};
-      window.EmberENV = window.TimelapseClientENV.EmberENV;
-    </script>
     <script src="assets/vendor.js"></script>
     <script src="assets/timelapse-client.js"></script>
     <script>
+      window.TimelapseClientENV = require('timelapse-client/config/environment')['default'];
+      window.EmberENV = window.TimelapseClientENV.EmberENV;
       window.TimelapseClient = require('timelapse-client/app')['default'].create(TimelapseClientENV.APP);
     </script>
   </body>

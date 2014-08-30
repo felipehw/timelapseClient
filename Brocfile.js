@@ -21,24 +21,24 @@ var app = new EmberApp();
 // along with the exports of each module as its value.
 
 /* As dependências que inseri via bower */
-app.import('vendor/socket.io-client/socket.io.js');
-app.import('vendor/ember-sockets/dist/ember-sockets.js');
+app.import('bower_components/socket.io-client/socket.io.js');
+app.import('bower_components/ember-sockets/dist/ember-sockets.js');
 
 app.import({
-  development: 'vendor/momentjs/moment.js',
-  production:  'vendor/momentjs/min/moment.min.js'
+  development: 'bower_components/momentjs/moment.js',
+  production:  'bower_components/momentjs/min/moment.min.js'
 });
-app.import('vendor/momentjs/locale/pt-br.js');
+app.import('bower_components/momentjs/locale/pt-br.js');
 
-app.import('vendor/bootstrap/dist/css/bootstrap.css');
-var fontTree = pickFiles('vendor/bootstrap/dist/fonts', {
+app.import('bower_components/bootstrap/dist/css/bootstrap.css');
+var fontTree = pickFiles('bower_components/bootstrap/dist/fonts', {
   srcDir: '/',
   files: ['*'],
   destDir: '/fonts'
 });
 
 /*
-var fontTree = pickFiles('vendor/font-awesome/fonts', {
+var fontTree = pickFiles('bower_components/font-awesome/fonts', {
   srcDir: '/',
   files: ['*'],
   destDir: '/assets/fonts'
