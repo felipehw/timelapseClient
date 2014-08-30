@@ -1,9 +1,13 @@
 // MAIN SCSS
 
+/* BOOTSTRAP */
+@import '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'; // p/ passar o erro de CORS
+/* /BOOTSTRAP */
+
 /* FONT AWESOME */
 //$fa-font-path: "/assets/fonts" !default; // sobrescrevendo o dir onde estão as fontes
 // //@import "vendor/font-awesome/scss/font-awesome.scss";
-//@import '//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css';
+//@import '//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'; // p/ passar o erro de CORS
 /* /FONT AWESOME */
 
 /* [Grid - A simple guid to responsive design](http://www.adamkaplan.me/grid/) */
