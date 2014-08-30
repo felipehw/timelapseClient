@@ -1,7 +1,18 @@
-<h1>Main Template</h1>
-
-{{#link-to 'timelapses'}}Timelapses{{/link-to}}
-{{#link-to 'timelapse' 'floripa001'}}Timelapses{{/link-to}}
-
+<ul class="nav nav-tabs" role="tablist">
+  <li>{{#link-to 'main'}}Main{{/link-to}}</li>
+  <li>{{#link-to 'timelapses'}}Timelapses{{/link-to}}</li>
+</ul>
 
 {{outlet}}
+
+<footer>
+  Feito com
+  <a href="http://www.raspberrypi.org/" target="_blank">Raspberry Pi</a> +
+  <a href="http://debian.org/" target="_blank">Debian GNU/Linux</a> +
+  <a href="http://nodejs.org/" target="_blank">Node.js</a> +
+  <a href="http://emberjs.com/" target="_blank">Ember.js</a>
+</footer>
+
+
+
+

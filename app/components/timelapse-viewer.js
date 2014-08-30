@@ -17,7 +17,13 @@ export default Ember.Component.extend({
     return nPhotoActual !== null ? nPhotoActual + 1 : null; //for template, not array's index
   }.property('nPhotoActual'),
   photoActualData: function() {
-    return this.get('photos')[this.get('nPhotoActual')];
+    var that = this,
+        frameFromImgElementActual = that.get('imgElementActual') ? that.get('imgElementActual').alt : null,
+        photoActualData = null;
+    if (frameFromImgElementActual !== null) {
+      photoActualData = that.get('photos').findBy('frame', frameFromImgElementActual);
+    }
+    return photoActualData;
   }.property('nPhotoActual'),
   photoChangerSpeedInFps: 2,
   photoChangerSpeedInFpsMax: 20,
@@ -43,14 +49,31 @@ export default Ember.Component.extend({
         that.downloadPhotos();
       }, 100);
     };
+    var insertImgOnRightPosition = function(imgsArray, img) {
+      if (imgsArray.length <= 0) {
+        imgsElements.pushObject(img);
+      } else if ( window.Number(imgsArray[0].alt) > window.Number(img.alt) ) {
+        imgsArray.insertAt(0, img);
+      } else {
+        for (var i = imgsArray.length - 1; i >= 0; i--) {
+          if ( window.Number(imgsArray[i].alt) < window.Number(img.alt) ) {
+            imgsArray.insertAt(i + 1, img);
+            break;
+          }
+        }
+      }
+    };
     if ( that.get('nPhotosLoaded') < photos.length) {
       if ( !that.get('isDownloadingPhotos') ) {
         that.set('isDownloadingPhotos', true);
       }
       img = window.document.createElement('img');
-      imgsElements.pushObject(img);
       img.addEventListener('load', callDownloadIteratorRecursively, false);
+      img.alt = photos[ that.get('nPhotosLoaded') ].frame;
       img.src = path + photos[ that.get('nPhotosLoaded') ].filename;
+
+      insertImgOnRightPosition(imgsElements, img);
+
       if ( !that.get('isChangeImgElementActualActive') && that.get('nPhotosLoaded') / photos.length > 0.1) {
         that.changeImgElementActual();
       }

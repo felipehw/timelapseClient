@@ -1,21 +1,20 @@
-<h1>Time-lapse - Florianópolis</h1>
-<h2>Jul 23, 2014 (02:00 - 23:00) - info fake preencher c/ moment -</h2>
+<header>
+  <h1 class="timelapse-info">
+    {{place}}.
+    {{format-date startTimeFtd null 'compact'}} - {{format-date endTimeFtd null 'compact'}}
+  </h1>
+  <span class="timelapse-status">
+    <span {{bind-attr class=":dot isWebSocketConnectionActive:active:inactive"}}></span>
+  </span>
+</header>
 
-{{place}}
-{{startTime}}
-{{endTime}}
-
+<!--
 <nav>
   <a href="">Galeria</a>
   <a href="">Vídeo</a>
 </nav>
-
+-->
 
 {{timelapse-viewer path=path photos=photos}}
-
-
-<footer>
-  Feito com Raspberry Pi + Debian GNU/Linux + Node.js + Ember.js
-</footer>
 
 {{outlet}}

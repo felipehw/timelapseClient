@@ -7,7 +7,7 @@
   <img alt="Loading">
   {{#if photoActualData.date}}
     <figcaption class="photo-info">
-        <span class="photo-date"> {{photoActualData.date}} </span>
+        <span class="photo-date"> {{format-date photoActualData.date null 'compact'}} </span>
     </figcaption>
   {{/if}}
 </figure>

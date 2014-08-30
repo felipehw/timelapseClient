@@ -25,13 +25,35 @@
 
 $black     : black;
 $gray-dar  : #b3b3b3; // color loading
-$pink       : pink;    // important feedback background
+$gray-dar2 : #555;
+$green     : green;
+$orange    : orange;
+$pink      : pink;    // important feedback background
 
 /* /CORES */
 
 html, body {
-  color: $black;
-  margin: 20px;
+  color: $gray-dar2;
+  margin: 5px 20px;
+}
+
+h1 {
+  font-size: 1.8rem;
+}
+h2 {
+  font-size: 1.6rem;
+}
+h3 {
+  font-size: 1.4rem;
+}
+h4 {
+  font-size: 1.2rem;
+}
+h5 {
+  font-size: 1.0rem;
+}
+h6 {
+  font-size: 0.8rem;
 }
 
 .button {
@@ -45,9 +67,43 @@ html, body {
     color: $gray-dar;
 }
 
+.main {
+  p {
+    padding: 0.5rem;
+  }
+  footer {
+    color: $gray-dar2;
+    text-align: center;
+  }
+}
+
+.timelapse {
+  header {
+    h1.timelapse-info {
+      display: inline-block;
+      font-size: 1.5rem;
+      margin-left: 0.5rem;
+    }
+    .timelapse-status {
+      .dot {
+        background: $green;
+        border-radius: 50%;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+      }
+      .dot.inactive {
+        background: $orange;
+      }
+    }
+  }
+
+}
+
 .timelapse-viewer {
+  display: inline-block;
   position: relative;
-  width: 100%;
+  max-width: 100%;
   margin-bottom: 1rem;
   margin-top: 1rem;
   .photo-container {
@@ -55,7 +111,8 @@ html, body {
     box-shadow: 1px 1px 4px #000;
     text-align: center;
     img {
-      width: 100%;
+      max-width: 100%;
+      max-height: 80vh;
     }
   }
   .download-status {

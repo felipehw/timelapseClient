@@ -19,8 +19,16 @@ var app = new EmberApp();
 // modules that you would like to import into your application
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
+
+/* As dependências que inseri via bower */
 app.import('vendor/socket.io-client/socket.io.js');
 app.import('vendor/ember-sockets/dist/ember-sockets.js');
+
+app.import({
+  development: 'vendor/momentjs/moment.js',
+  production:  'vendor/momentjs/min/moment.min.js'
+});
+app.import('vendor/momentjs/locale/pt-br.js');
 
 app.import('vendor/bootstrap/dist/css/bootstrap.css');
 var fontTree = pickFiles('vendor/bootstrap/dist/fonts', {
@@ -36,6 +44,7 @@ var fontTree = pickFiles('vendor/font-awesome/fonts', {
   destDir: '/assets/fonts'
 });
 */
+/* /As dependências que inseri via bower */
 
 //module.exports = app.toTree();
 module.exports = mergeTrees([app.toTree(), fontTree]);
